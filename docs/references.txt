@@ -1,0 +1,5 @@
+Following sources inspired me in one way or another for this project:
+
+[1] https://github.com/VMML/vmmlib
+[2] http://www.cs.cmu.edu/~barbic/code/index.html
+[3] https://github.com/AnyarInc/Ascent
