@@ -22,6 +22,9 @@ int main()
     r = x * p;       // Scalar multiplication
     a = p * a;       // Vector multiplication
     x = det(p);      // Determinant
+    x = trace(p);    // Trace
+    x = norm(p);     // Norm
+    r = trans(p);    // Transpose
     r = inv(p);      // Inverse
     p.set(0, 0, 45); // First element = 45
     x = p(0, 0);     // Access first element
