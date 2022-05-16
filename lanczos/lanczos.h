@@ -7,5 +7,7 @@
 #include "matrix.h"
 #include "vector.h"
 #include "quaternion.h"
+#include "dcm.h"
+#include "euler.h"
 
 #endif // lanczos.h
