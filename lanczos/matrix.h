@@ -23,7 +23,7 @@ public:
     Matrix(const float (&array)[R][C]);
     Matrix(const Matrix &m);
     Matrix();
-    ~Matrix() {}
+    virtual ~Matrix() {}
 
     float M[R][C];
 
@@ -48,7 +48,7 @@ public:
     template <uint8_t U>
     friend float trace(const Matrix<U, U> &m);
 
-    // Matrix-Matrix opertations
+    // Matrix-Matrix operations
     template <uint8_t T>
     Matrix<R, T> operator*(const Matrix<C, T> &m) const;
 

@@ -20,7 +20,7 @@ public:
     Vector(const float (&array)[N]);
     Vector(const Vector &m);
     Vector();
-    ~Vector() {}
+    virtual ~Vector() {}
 
     void operator=(const float (&array)[N]);
     void operator=(const Vector &m);
