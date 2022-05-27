@@ -12,7 +12,7 @@
 #include <iomanip>
 #endif
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 class Matrix
 {
 private:
@@ -33,23 +33,23 @@ public:
     Matrix compute_inv() const;
     float compute_det() const;
 
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend float norm(const Matrix<U, V> &m);
 
-    template <size_t U>
+    template <uint8_t U>
     friend float det(const Matrix<U, U> &m);
 
-    template <size_t U>
+    template <uint8_t U>
     friend Matrix<U, U> inv(const Matrix<U, U> &m);
 
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend Matrix<V, U> trans(const Matrix<U, V> &m);
 
-    template <size_t U>
+    template <uint8_t U>
     friend float trace(const Matrix<U, U> &m);
 
     // Matrix-Matrix opertations
-    template <size_t T>
+    template <uint8_t T>
     Matrix<R, T> operator*(const Matrix<C, T> &m) const;
 
     Matrix operator+(const Matrix &m) const;
@@ -58,7 +58,7 @@ public:
 
     // Matrix-Vector operations
     Vector<R> operator*(const Vector<C> &v) const;
-    template <size_t U>
+    template <uint8_t U>
     friend Matrix<U, U> vvT(const Vector<U> &v1, const Vector<U> &v2);
 
     // Scalar-Matrix operations
@@ -67,26 +67,26 @@ public:
     Matrix operator-(float s);
 
     // Matrix-Scalar operations
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend Matrix<U, V> operator*(float s, const Matrix<U, V> &m);
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend Matrix<U, V> operator+(float s, const Matrix<U, V> &m);
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend Matrix<U, V> operator-(float s, const Matrix<U, V> &m);
 
     // Matrix elements interface
     void set(uint8_t r, uint8_t c, float value);
-    float operator()(size_t r, size_t c) const;
+    float operator()(uint8_t r, uint8_t c) const;
     Vector<C> get_row(uint8_t r) const;
     Vector<R> get_col(uint8_t c) const;
 
 #if DISPLAY_MATH == 1
-    template <size_t U, size_t V>
+    template <uint8_t U, uint8_t V>
     friend void operator<<(std::ostream &oc, const Matrix<U, V> &m);
 #endif
 };
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C>::Matrix(const float (&array)[R][C])
 {
     for (uint8_t r = 0; r < rows; r++)
@@ -98,7 +98,7 @@ Matrix<R, C>::Matrix(const float (&array)[R][C])
     }
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C>::Matrix(const Matrix<R, C> &m)
 {
     for (uint8_t r = 0; r < rows; r++)
@@ -110,7 +110,7 @@ Matrix<R, C>::Matrix(const Matrix<R, C> &m)
     }
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C>::Matrix()
 {
     for (uint8_t r = 0; r < rows; r++)
@@ -122,7 +122,7 @@ Matrix<R, C>::Matrix()
     }
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 void Matrix<R, C>::operator=(const float (&array)[R][C])
 {
     for (uint8_t r = 0; r < rows; r++)
@@ -134,7 +134,7 @@ void Matrix<R, C>::operator=(const float (&array)[R][C])
     }
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 void Matrix<R, C>::operator=(const Matrix &m)
 {
     for (uint8_t r = 0; r < rows; r++)
@@ -147,13 +147,13 @@ void Matrix<R, C>::operator=(const Matrix &m)
 }
 
 // Frobenius norm
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 float norm(const Matrix<R, C> &m)
 {
     float norm = 0.0;
-    for (int r = 0; r < m.rows; r++)
+    for (uint8_t r = 0; r < m.rows; r++)
     {
-        for (int c = 0; c < m.cols; c++)
+        for (uint8_t c = 0; c < m.cols; c++)
         {
 
             norm += m.M[r][c] * m.M[r][c];
@@ -162,11 +162,11 @@ float norm(const Matrix<R, C> &m)
     return sqrt(norm);
 }
 
-template <size_t U>
+template <uint8_t U>
 float trace(const Matrix<U, U> &a)
 {
     float trace = 0.0;
-    for (int i_iters = 0; i_iters < U; i_iters++)
+    for (uint8_t i_iters = 0; i_iters < U; i_iters++)
     {
         trace += a.M[i_iters][i_iters];
     }
@@ -233,7 +233,7 @@ float Matrix<4, 4>::compute_det() const
            m01 * m10 * m22 * m33 + m00 * m11 * m22 * m33;
 }
 
-template <size_t R>
+template <uint8_t R>
 float det(const Matrix<R, R> &m)
 {
     return m.compute_det();
@@ -272,13 +272,13 @@ Matrix<3, 3> Matrix<3, 3>::compute_inv() const
     return inv;
 }
 
-template <size_t R>
+template <uint8_t R>
 Matrix<R, R> inv(const Matrix<R, R> &m)
 {
     return m.compute_inv();
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<C, R> trans(const Matrix<R, C> &m)
 {
     Matrix<C, R> transpose;
@@ -292,20 +292,20 @@ Matrix<C, R> trans(const Matrix<R, C> &m)
     return transpose;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 void Matrix<R, C>::set(uint8_t r, uint8_t c, float value)
 {
     M[r][c] = value;
 }
 
-template <size_t R, size_t C>
-float Matrix<R, C>::operator()(size_t r, size_t c) const
+template <uint8_t R, uint8_t C>
+float Matrix<R, C>::operator()(uint8_t r, uint8_t c) const
 {
     return M[r][c];
 }
 
-template <size_t R, size_t C>
-template <size_t T>
+template <uint8_t R, uint8_t C>
+template <uint8_t T>
 Matrix<R, T> Matrix<R, C>::operator*(const Matrix<C, T> &m) const
 {
     Matrix<R, T> output;
@@ -324,7 +324,7 @@ Matrix<R, T> Matrix<R, C>::operator*(const Matrix<C, T> &m) const
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator+(const Matrix<R, C> &m) const
 {
     Matrix<R, C> output;
@@ -338,7 +338,7 @@ Matrix<R, C> Matrix<R, C>::operator+(const Matrix<R, C> &m) const
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator-(const Matrix<R, C> &m) const
 {
     Matrix<R, C> output;
@@ -352,7 +352,7 @@ Matrix<R, C> Matrix<R, C>::operator-(const Matrix<R, C> &m) const
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator/(const Matrix<R, C> &m) const
 {
     Matrix<R, C> output;
@@ -366,14 +366,14 @@ Matrix<R, C> Matrix<R, C>::operator/(const Matrix<R, C> &m) const
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Vector<R> Matrix<R, C>::operator*(const Vector<C> &v) const
 {
     Vector<R> output;
     for (uint8_t r = 0; r < R; r++)
     {
         float elem = 0.0;
-        for (size_t c = 0; c < C; c++)
+        for (uint8_t c = 0; c < C; c++)
         {
             elem += M[r][c] * v.V[c];
         }
@@ -382,7 +382,7 @@ Vector<R> Matrix<R, C>::operator*(const Vector<C> &v) const
     return output;
 }
 
-template <size_t U>
+template <uint8_t U>
 Matrix<U, U> vvT(const Vector<U> &v1, const Vector<U> &v2)
 {
     Matrix<U, U> output;
@@ -396,7 +396,7 @@ Matrix<U, U> vvT(const Vector<U> &v1, const Vector<U> &v2)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator*(float s)
 {
     Matrix<R, C> output;
@@ -410,7 +410,7 @@ Matrix<R, C> Matrix<R, C>::operator*(float s)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator+(float s)
 {
     Matrix<R, C> output;
@@ -424,7 +424,7 @@ Matrix<R, C> Matrix<R, C>::operator+(float s)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> Matrix<R, C>::operator-(float s)
 {
     Matrix<R, C> output;
@@ -438,7 +438,7 @@ Matrix<R, C> Matrix<R, C>::operator-(float s)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> operator*(float s, const Matrix<R, C> &m)
 {
     Matrix<R, C> output;
@@ -452,7 +452,7 @@ Matrix<R, C> operator*(float s, const Matrix<R, C> &m)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> operator+(float s, const Matrix<R, C> &m)
 {
     Matrix<R, C> output;
@@ -466,7 +466,7 @@ Matrix<R, C> operator+(float s, const Matrix<R, C> &m)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Matrix<R, C> operator-(float s, const Matrix<R, C> &m)
 {
     Matrix<R, C> output;
@@ -480,7 +480,7 @@ Matrix<R, C> operator-(float s, const Matrix<R, C> &m)
     return output;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Vector<C> Matrix<R, C>::get_row(uint8_t r) const
 {
     Vector<C> row;
@@ -491,7 +491,7 @@ Vector<C> Matrix<R, C>::get_row(uint8_t r) const
     return row;
 }
 
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 Vector<R> Matrix<R, C>::get_col(uint8_t c) const
 {
     Vector<R> col;
@@ -503,7 +503,7 @@ Vector<R> Matrix<R, C>::get_col(uint8_t c) const
 }
 
 #if DISPLAY_MATH == 1
-template <size_t R, size_t C>
+template <uint8_t R, uint8_t C>
 void operator<<(std::ostream &os, const Matrix<R, C> &m)
 {
     os << '\n';
@@ -513,7 +513,7 @@ void operator<<(std::ostream &os, const Matrix<R, C> &m)
            << std::setfill(' ')
            << std::setprecision(10)
            << static_cast<double>(m.M[r][0]);
-        for (int c = 1; c < C; c++)
+        for (uint8_t c = 1; c < C; c++)
         {
             std::cout << std::setw(18)
                       << std::setfill(' ')
