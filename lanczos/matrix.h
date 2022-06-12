@@ -4,10 +4,10 @@
 #define _LANCZOS_MATRIX_H_
 
 #include "vector.h"
-#include <cstdint>
-#include <cmath>
 
 #if DISPLAY_MATH == 1
+#include <cstdint>
+#include <cmath>
 #include <iostream>
 #include <iomanip>
 #endif

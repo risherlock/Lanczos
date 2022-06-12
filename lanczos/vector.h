@@ -3,10 +3,9 @@
 #ifndef _LANCZOS_VECTOR_H_
 #define _LANCZOS_VECTOR_H_
 
+#if DISPLAY_MATH == 1
 #include <cstdint>
 #include <cmath>
-
-#if DISPLAY_MATH == 1
 #include <iostream>
 #include <iomanip>
 #endif
