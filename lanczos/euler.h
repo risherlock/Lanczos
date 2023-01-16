@@ -23,7 +23,7 @@ namespace lnz
         Matrix<3, 3> get_dcm();
     };
 
-    Euler::Euler(const float (&array)[3])
+    inline Euler::Euler(const float (&array)[3])
     {
         for (uint8_t n = 0; n < 3; n++)
         {
@@ -31,7 +31,7 @@ namespace lnz
         }
     }
 
-    Euler::Euler(const Euler &q)
+    inline Euler::Euler(const Euler &q)
     {
         for (uint8_t n = 0; n < 3; n++)
         {
@@ -39,7 +39,7 @@ namespace lnz
         }
     }
 
-    Euler::Euler(const Vector<3> &v)
+    inline Euler::Euler(const Vector<3> &v)
     {
         for (uint8_t n = 0; n < 3; n++)
         {
@@ -47,7 +47,7 @@ namespace lnz
         }
     }
 
-    Euler::Euler()
+    inline Euler::Euler()
     {
         V[0] = 1;
         for (uint8_t n = 1; n < 3; n++)
@@ -56,7 +56,7 @@ namespace lnz
         }
     }
 
-    void Euler::operator=(const float (&array)[3])
+    inline void Euler::operator=(const float (&array)[3])
     {
         for (uint8_t n = 0; n < 3; n++)
         {
@@ -64,7 +64,7 @@ namespace lnz
         }
     }
 
-    void Euler::operator=(const Euler &q)
+    inline void Euler::operator=(const Euler &q)
     {
         for (uint8_t n = 0; n < 3; n++)
         {
@@ -72,7 +72,7 @@ namespace lnz
         }
     }
 
-    Matrix<3, 3> Euler::get_dcm()
+    inline Matrix<3, 3> Euler::get_dcm()
     {
         Matrix<3, 3> Q;
         float yaw = V[0];

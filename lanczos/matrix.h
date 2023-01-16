@@ -176,13 +176,13 @@ namespace lnz
     }
 
     template <>
-    float Matrix<1, 1>::compute_det() const
+    inline float Matrix<1, 1>::compute_det() const
     {
         return M[0][0];
     }
 
     template <>
-    float Matrix<2, 2>::compute_det() const
+    inline float Matrix<2, 2>::compute_det() const
     {
         const float a = M[0][0];
         const float b = M[0][1];
@@ -192,7 +192,7 @@ namespace lnz
     }
 
     template <>
-    float Matrix<3, 3>::compute_det() const
+    inline float Matrix<3, 3>::compute_det() const
     {
         float d1 = M[1][1] * M[2][2] - M[2][1] * M[1][2];
         float d2 = M[1][0] * M[2][2] - M[2][0] * M[1][2];
@@ -202,7 +202,7 @@ namespace lnz
     }
 
     template <>
-    float Matrix<4, 4>::compute_det() const
+    inline float Matrix<4, 4>::compute_det() const
     {
         float m00 = M[0][0];
         float m10 = M[1][0];
@@ -236,13 +236,13 @@ namespace lnz
     }
 
     template <uint8_t R>
-    float det(const Matrix<R, R> &m)
+    inline float det(const Matrix<R, R> &m)
     {
         return m.compute_det();
     }
 
     template <>
-    Matrix<3, 3> Matrix<3, 3>::compute_inv() const
+    inline Matrix<3, 3> Matrix<3, 3>::compute_inv() const
     {
         Matrix<3, 3> inv;
 
@@ -275,13 +275,13 @@ namespace lnz
     }
 
     template <uint8_t R>
-    Matrix<R, R> inv(const Matrix<R, R> &m)
+    inline Matrix<R, R> inv(const Matrix<R, R> &m)
     {
         return m.compute_inv();
     }
 
     template <uint8_t R, uint8_t C>
-    Matrix<C, R> trans(const Matrix<R, C> &m)
+    inline Matrix<C, R> trans(const Matrix<R, C> &m)
     {
         Matrix<C, R> transpose;
         for (uint8_t r = 0; r < m.rows; r++)

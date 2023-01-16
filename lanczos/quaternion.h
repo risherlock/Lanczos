@@ -24,7 +24,7 @@ namespace lnz
         Vector<3> get_euler();
     };
 
-    Quaternion::Quaternion(const float (&array)[4])
+    inline Quaternion::Quaternion(const float (&array)[4])
     {
         for (uint8_t n = 0; n < 4; n++)
         {
@@ -32,7 +32,7 @@ namespace lnz
         }
     }
 
-    Quaternion::Quaternion(const Quaternion &q)
+    inline Quaternion::Quaternion(const Quaternion &q)
     {
         for (uint8_t n = 0; n < 4; n++)
         {
@@ -40,7 +40,7 @@ namespace lnz
         }
     }
 
-    Quaternion::Quaternion(const Vector<4> &v)
+    inline Quaternion::Quaternion(const Vector<4> &v)
     {
         for (uint8_t n = 0; n < 4; n++)
         {
@@ -48,7 +48,7 @@ namespace lnz
         }
     }
 
-    Quaternion::Quaternion()
+    inline Quaternion::Quaternion()
     {
         V[0] = 1;
         for (uint8_t n = 1; n < 4; n++)
@@ -57,7 +57,7 @@ namespace lnz
         }
     }
 
-    void Quaternion::operator=(const float (&array)[4])
+    inline void Quaternion::operator=(const float (&array)[4])
     {
         for (uint8_t n = 0; n < 4; n++)
         {
@@ -65,7 +65,7 @@ namespace lnz
         }
     }
 
-    void Quaternion::operator=(const Quaternion &q)
+    inline void Quaternion::operator=(const Quaternion &q)
     {
         for (uint8_t n = 0; n < 4; n++)
         {
@@ -73,7 +73,7 @@ namespace lnz
         }
     }
 
-    Matrix<3, 3> Quaternion::get_dcm()
+    inline Matrix<3, 3> Quaternion::get_dcm()
     {
         Matrix<3, 3> DCM;
         float q0 = V[3];
@@ -94,7 +94,7 @@ namespace lnz
         return DCM;
     }
 
-    Vector<3> Quaternion::get_euler()
+    inline Vector<3> Quaternion::get_euler()
     {
         float q0 = V[0];
         float q1 = V[1];

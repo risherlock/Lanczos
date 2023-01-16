@@ -24,7 +24,7 @@ namespace lnz
         Quaternion get_quaternion();
     };
 
-    DCM::DCM(const float (&array)[3][3])
+    inline DCM::DCM(const float (&array)[3][3])
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -35,7 +35,7 @@ namespace lnz
         }
     }
 
-    DCM::DCM(const DCM &m)
+    inline DCM::DCM(const DCM &m)
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -46,7 +46,7 @@ namespace lnz
         }
     }
 
-    DCM::DCM(const Matrix<3, 3> &m)
+    inline DCM::DCM(const Matrix<3, 3> &m)
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -57,7 +57,7 @@ namespace lnz
         }
     }
 
-    DCM::DCM()
+    inline DCM::DCM()
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -68,7 +68,7 @@ namespace lnz
         }
     }
 
-    void DCM::operator=(const float (&array)[3][3])
+    void inline DCM::operator=(const float (&array)[3][3])
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -79,7 +79,7 @@ namespace lnz
         }
     }
 
-    void DCM::operator=(const Matrix &m)
+    void inline DCM::operator=(const Matrix &m)
     {
         for (uint8_t r = 0; r < 3; r++)
         {
@@ -90,7 +90,7 @@ namespace lnz
         }
     }
 
-    Vector<3> DCM::get_euler()
+    Vector<3> inline DCM::get_euler()
     {
         float yaw = atan2(M[0][1], M[0][0]);
         float pitch = asin(-M[0][2]);
