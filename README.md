@@ -13,3 +13,7 @@ Math library for embedded systems intended for robotics, VR systems, flight soft
     <strong> Cornelius Lanczos (1893-1974) </strong>
   </em>
 </p>
+
+## TODO
+
+1. How did **inline** solve the problem with the multiple definition of specialized member functions ( ``compute_det()``) and functions of derived classes (``Quaternion::Quaternion(const float (&array)[4])``)? Is it good solution?
