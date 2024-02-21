@@ -19,4 +19,6 @@ Math library for embedded systems intended for robotics, VR systems, flight soft
 1. How did **inline** solve the problem with the multiple definition of specialized member functions ( ``compute_det()``) and functions of derived classes (``Quaternion::Quaternion(const float (&array)[4])``)? Is it good solution?
 2. Use **const** to the functions where you don't want the member variables to be changed inside.
 3. Base class should have virtual destructor. Otherwise the child objects will not be destructed.
- 
+4. **inline** accessors
+5. Initializer list for data members that are objects.
+6. 
